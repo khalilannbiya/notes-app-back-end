@@ -2,6 +2,7 @@ const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
 const { nanoid } = require("nanoid");
 const InvariantError = require("../../exceptions/InvariantError");
+const NotFoundError = require("../../exceptions/NotFoundError");
 
 class UsersService {
   constructor() {
@@ -38,6 +39,19 @@ class UsersService {
     const { rows } = await this._pool.query(query);
 
     if (rows.length > 0) throw new InvariantError("Gagal menambahkan user. Username sudah digunakan");
+  }
+
+  async getUserById(id) {
+    const query = {
+      text: "SELECT id, username, fullname FROM users WHERE id = $1",
+      values: [id],
+    };
+
+    const { rows } = await this._pool.query(query);
+
+    if (!rows.length) throw new NotFoundError("User tidak ditemukan");
+
+    return rows[0];
   }
 }
 
