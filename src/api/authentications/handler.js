@@ -90,7 +90,7 @@ class AuthenticationsHandler {
     }
   }
 
-  async deleteAuthenticationsHandler(request, h) {
+  async deleteAuthenticationHandler(request, h) {
     try {
       this._validator.validateDeleteAuthenticationPayload(request.payload);
 
