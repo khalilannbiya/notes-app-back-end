@@ -25,7 +25,7 @@ Go to the project directory
 
 Install the package using the following command:
 ```bash
-  pnpm i   cp .env.example .env
+  pnpm i 
 ```
 
 Copy and paste the .env file using the command:
